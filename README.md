@@ -24,7 +24,7 @@ These parameters were chosen to balance accuracy and training efficiency while p
 Ensure you have Python installed, then install the required dependencies:  
 ```bash
 pip install -r requirements.txt
-
+```
 ### **2. Optimising Hyperparameters (Optional)**
 Run the optimization script to find the best hyper parameters
 ```bash
