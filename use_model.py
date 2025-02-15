@@ -3,6 +3,8 @@ import torch
 from PIL import Image, ImageOps, ImageGrab
 from torchvision import transforms
 import tkinter as tk
+import torch.nn.functional as F
+import math
 
 def preprocess_canvas_image(canvas):
     # Capture the canvas
@@ -32,8 +34,18 @@ def preprocess_canvas_image(canvas):
 def predict_digit(model, image_tensor):
     image_tensor = image_tensor.unsqueeze(0)  # Add batch dimension
     output = model(image_tensor)
-    predicted_label = torch.argmax(output, dim=1).item()
+    # Apply softmax to convert logits in the class dimension to probabilities
+    probabilities = F.softmax(output, dim=1)
+    predicted_label = torch.argmax(probabilities, dim=1).item()
+    print_probabilities(probabilities)
     print(f"Predicted Label: {predicted_label}")
+
+def print_probabilities(probabilities):
+    print(f"Probability Distribution:")
+    raw_probabilities = probabilities.detach()[0]  # Get the probabilities without the extra info for PyTorch
+    for i, prob in enumerate(raw_probabilities):
+        print(f"Class {i}: {round(prob.item() * 100, 2)}%")
+
 
 # GUI for drawing digit
 def draw(event):
