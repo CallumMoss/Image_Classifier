@@ -43,6 +43,8 @@ Run the model. This will open a small canvas to draw a number on. Simply click p
 python use_model.py
 ```
 
+---
+
 ## **How The Model Performs Inference**
 After allowing our user to draw their number and interact with the predict button, we must now perform the inference.
 The following sections thoroughly explain the pipeline for the FCNN. Typically a CNN would be used for image inference, however as the inputs are so simple, we can skip convolutions, pooling and flatenning, and head straight to the FCNN phase. If you understand neural networks well already, I recommend simply reading the headings to understand the pipeline.
@@ -88,9 +90,13 @@ We pass our tensor into the model which performs forward propagation through its
 #### **4.3 Extract and Output the Predicted Label**
 We now use torch.argmax to extract the index of the highest value in the output tensor across the class dimension. We access dim=1, which tells it to consider the second dimension which corresponds to the classes dimension. We then get the class name itself from the index using .item(). Finally, we simply print the predicted label.
 
+---
+
 ### **How the model is optimised and trained**
 (TBD)
 CrossEntropyLoss automatically applies softmax
+
+---
 
 ## **Improvements**
 In the future I would like to improve the preprocessing to account for intentional misleading inputs, such as digits drawn close to the edge of the canvas.
