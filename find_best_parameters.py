@@ -4,12 +4,15 @@ import torch.optim as optim
 from torchvision import datasets, transforms
 from torch.utils.data import DataLoader, SubsetRandomSampler
 import numpy as np
-import optuna
+import optuna # A hyperparameter optimization library for automating the search for the best hyperparameters.
 
-# Define the model
-class SimpleNN(nn.Module):
+# Defining a model which inherits from the torch.nn.Module, which allows us to make use of various PyTorch functions.
+# Fully connected neural network.
+# Skips the convolutions stage that would typically feed into a FCNN.
+# This is because the dataset is rather simple, so going straight to prediction would be faster.
+class FCNN(nn.Module):
     def __init__(self):
-        super(SimpleNN, self).__init__()
+        super(FCNN, self).__init__()
         self.layers = nn.Sequential(
             nn.Flatten(),
             nn.Linear(784, 128),
@@ -43,7 +46,7 @@ def objective(trial):
     batch_size = trial.suggest_int('batch_size', 16, 128, step=16)
 
     # Create model and optimizer
-    model = SimpleNN()
+    model = FCNN()
     optimizer = optim.Adam(model.parameters(), lr=lr)
 
     # Get data loaders with cross-validation

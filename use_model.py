@@ -1,4 +1,4 @@
-from train import SimpleNN
+from train import FCNN
 import torch
 from PIL import Image, ImageOps, ImageGrab
 from torchvision import transforms
@@ -28,7 +28,6 @@ def preprocess_canvas_image(canvas):
     
     return img_tensor
 
-
 # Prediction function
 def predict_digit(model, image_tensor):
     image_tensor = image_tensor.unsqueeze(0)  # Add batch dimension
@@ -52,7 +51,7 @@ def clear_canvas():
 if __name__ == "__main__":
     # Load trained model
     PATH = "model/image_classifier.pt"
-    model = SimpleNN()
+    model = FCNN()
     model.load_state_dict(torch.load(PATH))
     model.eval()
 

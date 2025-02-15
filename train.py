@@ -4,7 +4,7 @@ import torch.optim as optim
 from torchvision import datasets, transforms
 from torch.utils.data import DataLoader, SubsetRandomSampler
 import numpy as np
-from find_best_parameters import SimpleNN
+from find_best_parameters import FCNN
 
 if __name__ == "__main__":
     # Optimal hyperparameters found from find_best_parameters.py
@@ -27,7 +27,7 @@ if __name__ == "__main__":
     test_loader = torch.utils.data.DataLoader(testset, batch_size=BEST_BATCH_SIZE, shuffle=True)
 
     # Model, loss function, and optimizer with the best hyperparameters
-    model = SimpleNN()
+    model = FCNN()
     optimizer = torch.optim.Adam(model.parameters(), lr=BEST_LEARNING_RATE)
     loss_function = nn.CrossEntropyLoss()
 
