@@ -1,13 +1,15 @@
+# train.py
+
 import torch
 import torch.nn as nn
 import torch.optim as optim
 from torchvision import datasets, transforms
 from torch.utils.data import DataLoader, SubsetRandomSampler
 import numpy as np
-from find_best_parameters import FCNN
+from model import FCNN  # Import the model
 
 if __name__ == "__main__":
-    # Optimal hyperparameters found from find_best_parameters.py
+    # Optimal hyperparameters found from optimise.py
     BEST_LEARNING_RATE = 0.001065741156220378
     BEST_BATCH_SIZE = 128
     BEST_EPOCHS = 40

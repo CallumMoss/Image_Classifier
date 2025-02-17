@@ -1,3 +1,5 @@
+# predict.py
+
 from train import FCNN
 import torch
 from PIL import Image, ImageOps, ImageGrab
@@ -40,12 +42,12 @@ def predict_digit(model, image_tensor):
     print_probabilities(probabilities)
     print(f"Predicted Label: {predicted_label}")
 
+# Prints the probability distribution
 def print_probabilities(probabilities):
     print(f"Probability Distribution:")
     raw_probabilities = probabilities.detach()[0]  # Get the probabilities without the extra info for PyTorch
     for i, prob in enumerate(raw_probabilities):
         print(f"Class {i}: {round(prob.item() * 100, 2)}%")
-
 
 # GUI for drawing digit
 def draw(event):
