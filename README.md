@@ -96,7 +96,6 @@ We now use torch.argmax to extract the index of the highest value in the output 
 
 ---
 
-### **How the model is optimised and trained**
 ### Optimisation:
 By running optimise.py, we are making use of the Optuna library to find the best hyper parameter values to train our model with. Namely, these are the learning rate, batch size and the number of epochs to train for, where one epoch is one traversal over the entire dataset of 60,000 images. 
 
@@ -106,7 +105,9 @@ Our preprocessing consists of several steps. We instill random rotations and tra
 #### **2. Optimise using Optuna**
 We perform our training over 40 epochs on 20 different trial values. At the end of each trial, the models accuracy is tested on the validation set and we use Optuna to optimise the parameters for the best accuracy. Optuna makes use of the Adam optimizer which includes various methods for improving accuracy, such as momentum and normalisation.
 
-#### Training:
+---
+
+### Training:
 Once the optimal hyperparameters are found, we can train our model performing the same preprocessing as we did during optimisation. We then simply save the model state into model/image_classifier.pt, which we can load in predict.py to use.
 
 ---
